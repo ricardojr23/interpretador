@@ -10,4 +10,4 @@ program = load_program('program.asm')
 # Executar o programa
 interpreter.run(program)
 
-#teste programa
+#teste programa111
