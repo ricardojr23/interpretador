@@ -1,0 +1,102 @@
+# Definir uma classe para representar o interpretador de assembly
+class AssemblyInterpreter:
+    
+    # Inicializar o interpretador
+    def __init__(self):
+        # Inicializar registradores
+        self.registers = {
+            'ax': 0,
+            'bx': 0,
+            'cx': 0,
+            'dx': 0,
+        }
+        # Inicializar memória
+        self.memory = [0] * 1000
+        
+        # Definir um dicionário de instruções
+        self.instructions = {
+            'mov': self.mov,
+            'add': self.add,
+            'sub': self.sub,
+            'mul': self.mul,
+            'div': self.div,
+            'ass': self.ass,
+            'jump': self.jump,
+            'jmpz': self.jmpz,
+            'jmpnz': self.jmpnz,
+            'print': self.print_reg,
+        }
+    
+    # Definir função de movimentação de valor
+    def mov(self, args):
+        self.registers[args[0]] = self.get_value(args[1])
+    
+    # Definir função de adição
+    def add(self, args):
+        self.registers[args[0]] += self.get_value(args[1])
+    
+    # Definir função de subtração
+    def sub(self, args):
+        self.registers[args[0]] -= self.get_value(args[1])
+    
+    # Definir função de multiplicação
+    def mul(self, args):
+        self.registers[args[0]] *= self.get_value(args[1])
+    
+    # Definir função de divisão
+    def div(self, args):
+        self.registers[args[0]] //= self.get_value(args[1])
+    
+    # Definir função de atribuição de valor
+    def ass(self, args):
+        self.memory[args[0]] = self.get_value(args[1])
+    
+    # Definir função de salto
+    def jump(self, args):
+        return int(args[0])
+    
+    # Definir função de salto se zero
+    def jmpz(self, args):
+        if self.registers[args[0]] == 0:
+            return int(args[1])
+        else:
+            return None
+    
+    # Definir função de salto se não zero
+    def jmpnz(self, args):
+        if self.registers[args[0]] != 0:
+            return int(args[1])
+        else:
+            return None
+    
+    # Definir função de impressão de valor
+    def print_reg(self, args):
+        print(f"{args[0]}: {self.registers[args[0]]}")
+    
+    # Definir função para obter o valor correto de um argumento
+    def get_value(self, arg):
+        if arg in self.registers:
+            return self.registers[arg]
+        else:
+            return int(arg)
+    
+    # Executar um programa de assembly
+    def run(self, program):
+        # Dividir o programa em linhas
+        lines = program.strip().split('\n')
+        
+        # Inicializar o contador de linhas e executar as instruções
+        i = 0
+        while i < len(lines):
+            # Dividir a linha em instrução e argumentos
+            parts = lines[i].strip().split()
+            instr = parts[0]
+            args = parts[1:]
+            
+            # Obter a função correspondente à instrução e executá-la
+            func = self
+
+
+
+
+ 

@@ -1,0 +1,11 @@
+# Definir função para ler um programa de assembly de um arquivo
+def load_program(file_path):
+    with open(file_path) as f:
+        return f.read()
+
+# Criar o interpretador e carregar o programa de um arquivo
+interpreter = AssemblyInterpreter()
+program = load_program('program.asm')
+
+# Executar o programa
+interpreter.run(program)
